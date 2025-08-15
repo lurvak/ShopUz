@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopUz - Onlayn Do'kon</title>
+    <link rel="stylesheet" href="{% static 'apps/styles.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="nav-brand">
+            <h1><i class="fas fa-shopping-bag"></i> ShopUz</h1>
+        </div>
+        <nav class="nav-menu">
+            <a href="{% url 'index-page' %}" class="nav-link active">Bosh sahifa</a>
+            <a href="{% url 'products-page' %}" class="nav-link">Mahsulotlar</a>
+            <a href="{% url 'about-page' %}" class="nav-link">Biz haqimizda</a>
+            <a href="contact.html" class="nav-link">Aloqa</a>
+        </nav>
+        <div class="nav-actions">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+            <button class="cart-btn" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </button>
+
+            {% if user.is_authenticated %}
+                <form action="{% url 'log-out' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+                {{ user.username }}
+            {% else %}
+                <a href="{% url 'login-page' %}" class="user-btn"><i class="fas fa-user"></i></a>
+            {% endif %}
+        </div>
+    </div>
+</header>
+
+{% block context %}
+
+{% endblock %}
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-shopping-bag"></i> ShopUz</h3>
+                <p>Eng yaxshi mahsulotlar va xizmatlar</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Tez havolalar</h4>
+                <ul>
+                    <li><a href="{% url 'index-page' %}">Bosh sahifa</a></li>
+                    <li><a href="{% url 'products-page' %}">Mahsulotlar</a></li>
+                    <li><a href="about.html">Biz haqimizda</a></li>
+                    <li><a href="contact.html">Aloqa</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Yordam</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Yetkazib berish</a></li>
+                    <li><a href="#">Qaytarish</a></li>
+                    <li><a href="#">Qo'llab-quvvatlash</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Aloqa</h4>
+                <p><i class="fas fa-phone"></i> +998 90 123 45 67</p>
+                <p><i class="fas fa-envelope"></i> info@shopuz.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Toshkent, O'zbekiston</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ShopUz. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="{% static 'apps/script.js' %}"></script>
+</body>
+</html>

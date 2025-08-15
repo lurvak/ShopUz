@@ -1,0 +1,47 @@
+{% block context %}
+
+    <main class="product-detail">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Bosh sahifa</a> >
+                <a href="products.html">Mahsulotlar</a> >
+                <span id="product-category">Kategoriya</span>
+            </div>
+
+            <div class="product-detail-content" id="product-detail-content">
+
+            </div>
+
+             Related Products
+            <section class="related-products">
+                <h2>O'xshash Mahsulotlar</h2>
+                <div class="products-grid" id="related-products">
+
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Savatcha</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Jami: <span id="cart-total">0</span> so'm</strong>
+            </div>
+            <button class="checkout-btn" onclick="goToCheckout()">
+                To'lov qilish <i class="fas fa-credit-card"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+{% endblock %}

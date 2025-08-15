@@ -1,0 +1,90 @@
+{% extends 'base.html'  %}
+{% block context %}
+
+    <main class="products-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Barcha Mahsulotlar</h1>
+                <p>Bizning keng assortimentimizdan tanlang</p>
+            </div>
+
+            <div class="filters">
+                <div class="filter-group">
+                    <label>Kategoriya:</label>
+                    <select id="category-filter" onchange="filterProducts()">
+                        <option value="">Barchasi</option>
+                        <option value="electronics">Elektronika</option>
+                        <option value="clothing">Kiyim</option>
+                        <option value="books">Kitoblar</option>
+                        <option value="home">Uy uchun</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Narx:</label>
+                    <select id="price-filter" onchange="filterProducts()">
+                        <option value="">Barchasi</option>
+                        <option value="0-100000">0 - 100,000 so'm</option>
+                        <option value="100000-500000">100,000 - 500,000 so'm</option>
+                        <option value="500000-1000000">500,000 - 1,000,000 so'm</option>
+                        <option value="1000000+">1,000,000+ so'm</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Saralash:</label>
+                    <select id="sort-filter" onchange="sortProducts()">
+                        <option value="name">Nom bo'yicha</option>
+                        <option value="price-low">Narx: Arzondan qimmmatga</option>
+                        <option value="price-high">Narx: Qimmatdan arzonga</option>
+                        <option value="rating">Reyting bo'yicha</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                {% for product in products %}
+                    <div class="product-card">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">${{ product.name }}</h3>
+                            <p class="product-description">{{ product.description }}</p>
+                            <div class="product-rating">
+                                <div class="stars">{{ product.rating }}</div>
+                                <span>{{ product.rating }}</span>
+                            </div>
+                            <div class="product-price">{{ product.price }}</div>
+                            <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id})">
+                                <i class="fas fa-cart-plus"></i> Savatga qo'shish
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </main>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Savatcha</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Jami: <span id="cart-total">0</span> so'm</strong>
+            </div>
+            <button class="checkout-btn" onclick="goToCheckout()">
+                To'lov qilish <i class="fas fa-credit-card"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+{% endblock %}

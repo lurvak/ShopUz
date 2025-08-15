@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirish - ShopUz</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <h1><i class="fas fa-shopping-bag"></i> ShopUz</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Bosh sahifa</a>
+                <a href="products.html" class="nav-link">Mahsulotlar</a>
+                <a href="about.html" class="nav-link">Biz haqimizda</a>
+                <a href="contact.html" class="nav-link">Aloqa</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="search-btn" onclick="performSearch()"><i class="fas fa-search"></i></button>
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="user-btn" onclick="window.location.href='login.html'"><i class="fas fa-user"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Page -->
+    <main class="auth-page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Hisobga kirish</h1>
+                    <p>ShopUz hisobingizga kirish uchun ma'lumotlaringizni kiriting</p>
+                </div>
+
+                <!-- Login Form -->
+                <form class="auth-form" id="login-form">
+                    <div class="form-group">
+                        <label for="loginEmail">Email yoki telefon *</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="text" id="loginEmail" name="loginEmail" required placeholder="email@example.com yoki +998901234567">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword">Parol *</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="loginPassword" name="loginPassword" required placeholder="Parolingizni kiriting">
+                            <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="rememberMe">
+                            <span class="checkmark"></span>
+                            Meni eslab qol
+                        </label>
+                        <a href="#" class="forgot-password" onclick="showForgotPassword()">Parolni unutdingizmi?</a>
+                    </div>
+
+                    <button type="submit" class="auth-btn">
+                        <i class="fas fa-sign-in-alt"></i> Kirish
+                    </button>
+                </form>
+
+                <!-- Social Login -->
+                <div class="social-login">
+                    <div class="divider">
+                        <span>yoki</span>
+                    </div>
+                    <div class="social-buttons">
+                        <button class="social-btn google" onclick="loginWithGoogle()">
+                            <i class="fab fa-google"></i>
+                            Google orqali kirish
+                        </button>
+                        <button class="social-btn facebook" onclick="loginWithFacebook()">
+                            <i class="fab fa-facebook-f"></i>
+                            Facebook orqali kirish
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Register Link -->
+                <div class="auth-footer">
+                    <p>Hisobingiz yo'qmi? <a href="#" onclick="showRegisterForm()">Ro'yxatdan o'ting</a></p>
+                </div>
+            </div>
+
+            <!-- Register Form (Hidden by default) -->
+            <div class="auth-card" id="register-card" style="display: none;">
+                <div class="auth-header">
+                    <h1>Ro'yxatdan o'tish</h1>
+                    <p>ShopUz'da yangi hisob yarating</p>
+                </div>
+
+                <form class="auth-form" id="register-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">Ism *</label>
+                            <div class="input-group">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="firstName" name="firstName" required placeholder="Ismingiz">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Familiya *</label>
+                            <div class="input-group">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="lastName" name="lastName" required placeholder="Familiyangiz">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerEmail">Email *</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="registerEmail" name="registerEmail" required placeholder="email@example.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPhone">Telefon *</label>
+                        <div class="input-group">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="registerPhone" name="registerPhone" required placeholder="+998 90 123 45 67">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPassword">Parol *</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="registerPassword" name="registerPassword" required placeholder="Kamida 8 ta belgi">
+                            <button type="button" class="password-toggle" onclick="togglePassword('registerPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength" id="password-strength"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Parolni tasdiqlang *</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Parolni qayta kiriting">
+                            <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="agreeTerms" required>
+                            <span class="checkmark"></span>
+                            <a href="#" onclick="showTerms()">Foydalanish shartlari</a> va <a href="#" onclick="showPrivacy()">Maxfiylik siyosati</a>ga roziman
+                        </label>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="newsletter">
+                            <span class="checkmark"></span>
+                            Yangiliklar va maxsus takliflar haqida xabar olishni xohlayman
+                        </label>
+                    </div>
+
+                    <button type="submit" class="auth-btn">
+                        <i class="fas fa-user-plus"></i> Ro'yxatdan o'tish
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Hisobingiz bormi? <a href="#" onclick="showLoginForm()">Kirish</a></p>
+                </div>
+            </div>
+
+            <!-- Forgot Password Form (Hidden by default) -->
+            <div class="auth-card" id="forgot-password-card" style="display: none;">
+                <div class="auth-header">
+                    <h1>Parolni tiklash</h1>
+                    <p>Email manzilingizni kiriting, sizga parolni tiklash havolasi yuboramiz</p>
+                </div>
+
+                <form class="auth-form" id="forgot-password-form">
+                    <div class="form-group">
+                        <label for="forgotEmail">Email *</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="forgotEmail" name="forgotEmail" required placeholder="email@example.com">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="auth-btn">
+                        <i class="fas fa-paper-plane"></i> Havola yuborish
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    <p><a href="#" onclick="showLoginForm()">← Kirish sahifasiga qaytish</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="auth-benefits">
+            <div class="container">
+                <h2>ShopUz hisobining afzalliklari</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <i class="fas fa-shipping-fast"></i>
+                        <h3>Tez buyurtma</h3>
+                        <p>Saqlangan ma'lumotlar bilan tezkor buyurtma berish</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-history"></i>
+                        <h3>Buyurtmalar tarixi</h3>
+                        <p>Barcha buyurtmalaringizni kuzatib boring</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-heart"></i>
+                        <h3>Sevimlilar ro'yxati</h3>
+                        <p>Yoqgan mahsulotlarni saqlang</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-tags"></i>
+                        <h3>Maxsus chegirmalar</h3>
+                        <p>Faqat a'zolar uchun maxsus takliflar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Savatcha</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be loaded by JavaScript -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Jami: <span id="cart-total">0</span> so'm</strong>
+            </div>
+            <button class="checkout-btn" onclick="goToCheckout()">
+                To'lov qilish <i class="fas fa-credit-card"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

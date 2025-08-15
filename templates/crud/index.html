@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block context %}
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Eng Yaxshi Mahsulotlar</h2>
+            <p>Sifatli va arzon narxlarda xarid qiling</p>
+            <button class="cta-btn" onclick="window.location.href='products.html'">
+                Xarid qilish <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+        <div class="hero-image">
+            <img src="/placeholder.svg?height=400&width=600" alt="Shopping">
+        </div>
+    </section>
+
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">Mashhur Mahsulotlar</h2>
+            <div class="products-grid" id="">
+                {% for product in products %}
+                    <div class="product-card">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">${{ product.name }}</h3>
+                            <p class="product-description">{{ product.description }}</p>
+                            <div class="product-rating">
+                                <div class="stars">{{ product.rating }}</div>
+                                <span>{{ product.rating }}</span>
+                            </div>
+                            <div class="product-price">{{ product.price }}</div>
+                            <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id})">
+                                <i class="fas fa-cart-plus"></i> Savatga qo'shish
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Kategoriyalar</h2>
+            <div class="categories-grid">
+                {% for category in categories %}
+                    <a href="{% url 'category-detail-page' category.pk %}">
+                        <div class="category-card">
+                            <i class="fas fa-laptop"></i>
+                            <h3>{{ category.name }}</h3>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Savatcha</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Jami: <span id="cart-total">0</span> so'm</strong>
+            </div>
+            <button class="checkout-btn" onclick="goToCheckout()">
+                To'lov qilish <i class="fas fa-credit-card"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+{% endblock %}

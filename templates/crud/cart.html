@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block context %}
+
+    <main class="cart-page">
+        <div class="container">
+            <div class="page-header">
+                <h1><i class="fas fa-shopping-cart"></i> Savatcha</h1>
+                <div class="breadcrumb">
+                    <a href="index.html">Bosh sahifa</a> > <span>Savatcha</span>
+                </div>
+            </div>
+
+            <div class="cart-content" id="cart-content">
+                <!-- Cart content will be loaded by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Recommended Products -->
+    <section class="recommended-products" id="recommended-section" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Sizga yoqishi mumkin</h2>
+            <div class="products-grid" id="recommended-products">
+                <!-- Recommended products will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
